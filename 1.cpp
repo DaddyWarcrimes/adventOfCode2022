@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
+#include <algorithm>
 #include "elf1.h"
 
 
@@ -10,6 +12,7 @@ int main(void){
 	int highest = 0;
 	
 	elf e;
+	std::vector<int> totals;
 
 	std::ifstream infile;
 	infile.open("1.txt");
@@ -26,15 +29,22 @@ int main(void){
 			e.addFruit(stoi(line));
 		}
 		else{
+			totals.push_back(e.total());
 			if(e.total() > highest){
 				highest = e.total();
 			}
 			e.clearAll();
 		}
 		
-		std::cout << line << " : " << line.length() << std::endl;
 	}
 	printf("Highest : %d\n", highest);
+	std::sort(totals.begin(), totals.end(), std::greater<int>());
+	int highThree = 0;
+	for(int i = 0; i < 3; i++){
+		highThree += totals[i];
+	}
+	
+		printf("Highest 3 : %d\n",highThree);
 
 }
 
