@@ -37,6 +37,7 @@ int main(void){
 		}
 		
 	}
+	infile.close();
 	printf("Highest : %d\n", highest);
 	std::sort(totals.begin(), totals.end(), std::greater<int>());
 	int highThree = 0;

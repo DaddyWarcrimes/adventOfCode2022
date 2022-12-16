@@ -146,6 +146,7 @@ int main(void){
 		printf("%d : total ", roundScore2(line.c_str()[0], line.c_str()[2]));
 		printf("%d : %d\n",total, ++count);
 	}
+	infile.close();
 	printf("Total: %d\n", total);
 }
 
