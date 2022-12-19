@@ -33,7 +33,7 @@ int main(void){
 		int D = stoi(line.substr(hyp2 + 1, line.length() - hyp2 - 1));
 	//	std::cout << line.substr(hyp2 + 1, line.length() - hyp2 - 1) << std::endl;
 		//Identify the overlaps
-		if((A <= C && D <= B) || ((C <= A && B <= D)) ){
+		if((A <= C && D <= B) || ((C <= A && B <= D)) || (A <= D && C < B) || (C <= B && A < D ) ){
 			std::cout << "Overlap" << std::endl;
 			overlaps ++;
 		}
