@@ -8,6 +8,7 @@
 void printCrates(std::vector<char> crates[9], int highlight = 10){
 	for(int i = 0; i < 9; i++){
 		if(crates[i].size() == 0){
+			std::cout << "[\n";
 			continue;
 		}
 		
@@ -82,11 +83,21 @@ int main(void){
 		printCrates(crates, source);
 		//Move crates from source to destination
 		std::cout << "---------------" << std::endl;
+		for(int i = quantity; i > 0 ; i--){
+			crates[destination].push_back(crates[source][crates[source].size() - i]);
+			std::cout << crates[source][crates[source].size() - i];
+		}
 		for(int i = 0; i < quantity; i++){
+			crates[source].pop_back();
+		}
+		
+
+		//part 1
+		/*for(int i = 0; i < quantity; i++){
 			std::cout << crates[source][crates[source].size() - 1] ;
 			crates[destination].push_back(crates[source][crates[source].size() - 1]);
 			crates[source].pop_back();
-		}
+		}*/
 		std::cout << std::endl;
 		std::cout << "---------------" << std::endl;
 		printCrates(crates, destination);
