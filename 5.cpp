@@ -3,12 +3,32 @@
 #include <string>
 #include <vector>
 
+#define DEBUG
+
+void printCrates(std::vector<char> crates[9], int highlight = 10){
+	for(int i = 0; i < 9; i++){
+		if(crates[i].size() == 0){
+			continue;
+		}
+		
+		for(int j = 0; j < crates[i].size(); j++){
+			std::cout << crates[i][j];
+		}
+		if(i == highlight){
+			std::cout << "  <----- " << highlight + 1 ;
+		}
+		
+		std::cout << std::endl;
+	}
+}
+
 int main(void){
 
+	
 	std::vector<char> crates[9];
 	
 	std::ifstream infile;
-	infile.open("5_test.txt");
+	infile.open("5.txt");
 	if(!infile){
 		printf("failed to open\n");
 	}
@@ -36,48 +56,47 @@ int main(void){
 			}
 		}
 		std::cout << line << std::endl;		
-/*		for(int i = 0; i < line.length(); i++){
-			printf("%d", i % 10);		
-		}
-		printf("\n");		*/
 	}
-	for(int i = 0; i < 9; i++){
-		if(crates[i].size() == 0){
+
+	printCrates(crates);
+
+	while (!infile.eof()){
+		getline(infile,line);
+		if(line.length() == 0){
 			continue;
 		}
 		
-		for(int j = 0; j < crates[i].size(); j++){
-			std::cout << crates[i][j];
-		}
-		std::cout << std::endl;
-
-	}
-	while (!infile.eof()){
-		getline(infile,line);
-		std::cout << line << std::endl;
+		std::cout << "------------------------------------------------" << std::endl << line << std::endl << "------------------------------------------------" << std::endl;;
+		// Find the delimiters
 		int d1 = line.find(" ");
 		int d2 = line.find(" ", d1 + 1);
 		int d3 = line.find(" ", d2 + 1);
 		int d4 = line.find(" ", d3 + 1);
 		int d5 = line.find(" ", d4 + 1);
-		for(int i = 0; i <= d5; i++){
-			if(i == d1 || i == d2 || i == d3 || i == d4 || i == d5){
-				printf("%c",'_');
-			}
-			else{
-			printf("%d", i % 10);
-			}
-		}
-		printf("\n");
-//		int quantity, source, destination;
-//		
-		std::cout << "|" << line.substr(d1 + 1, d2 - d1 - 1) << "|" << std:: endl;
-		std::string temp = line.substr(d1 + 1, d2 - d1 - 1);
-		std::cout << "|" << temp << "|" << std::endl;
-		std::cout <<stoi(temp) << std::endl;
-// 		int quantity = stoi(line.substr(d1 + 1, d2 - d1 - 1));
 
-		std::cout << "|" << line.substr(d3 + 1, d4 - d3 - 1) << "|" << std::endl;
+		// Store the numbers from the string
+		unsigned long int quantity = stoul(line.substr(d1 + 1, d2 - d1 - 1));
+		unsigned long int source = stoul(line.substr(d3 + 1, d4 - d3 - 1)) - 1;
+		unsigned long int destination = stoul( line.substr(d5 + 1, line.length() - d5 - 1)) - 1;
+
+		printCrates(crates, source);
+		//Move crates from source to destination
+		std::cout << "---------------" << std::endl;
+		for(int i = 0; i < quantity; i++){
+			std::cout << crates[source][crates[source].size() - 1] ;
+			crates[destination].push_back(crates[source][crates[source].size() - 1]);
+			crates[source].pop_back();
+		}
+		std::cout << std::endl;
+		std::cout << "---------------" << std::endl;
+		printCrates(crates, destination);
+		
 	}
+	
+	std::cout << std::endl  << "Final top layer: ";
+	for(int i = 0; i < 9; i++){
+		std::cout  << crates[i][crates[i].size() - 1];
+	}
+	std::cout << std::endl;
 	
 }
