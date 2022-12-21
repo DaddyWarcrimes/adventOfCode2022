@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <string.h>
+//#define DEBUG
 
 bool fromLeft(int map[99][99], int Y, int X){
 	if(X == 0){
@@ -72,6 +73,7 @@ int scenicScore(int map[99][99], int Y, int X){
 	int R = 0;
 	int T = 0;
 	int B = 0;
+
 	//Math shortcut
 	if(X == 0 || Y == 0 || X == 98 || Y ==98){
 		return 0;
@@ -80,26 +82,34 @@ int scenicScore(int map[99][99], int Y, int X){
 	for(int i = X - 1; i >=0; i--){
 		if(map[Y][i] >= map[Y][X] || i == 0){
 			L = X - i;
+			break;
 		}
 	}
 	//find R
 	for(int i = X + 1; i < 99; i ++){
 		if(map[Y][i] >= map[Y][X] || i == 98){
 			R = i - X;
+			break;
 		}
 	}
 	//find T
 	for(int i = Y - 1; i >= 0; i--){
 		if(map[i][X] >= map[Y][X] || i == 0){
 			T = Y - i;
+			break;
 		}
 	}
 	//find B
 	for(int i = Y + 1; i < 99; i++){
 		if(map[i][X] >= map[Y][X]){
-			B = i - X;
+			B = i - Y;
+			break;
 		}
 	}
+#ifdef DEBUG
+	printf("%s %d %d %d %d\n","---DEBUG---",L, R, T, B);
+#endif
+	
 	return L * R * T * B;
 }
 
@@ -156,4 +166,5 @@ int main(void){
 		
 	}
 	printf("\n%d\n",maxVis);
+
 }
