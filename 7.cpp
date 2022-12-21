@@ -98,6 +98,7 @@ int main(void){
 		}
 	}
 	std::cout << "Under 100k:\n";
+	int totalSub100k = 0;
 	for(int i = 0; i < directories.size(); i++){
 		infile.clear();
 		infile.seekg(0);
@@ -110,10 +111,11 @@ int main(void){
 			}
 		}
 		if(dirTotal <= 100000){
+			totalSub100k += dirTotal;
 			std::cout << directories[i] << std::endl;
 		}
 		
 
 	}
-	
+	std::cout << std::endl << totalSub100k << std::endl;
 }
