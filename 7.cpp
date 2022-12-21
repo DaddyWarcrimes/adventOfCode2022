@@ -97,9 +97,10 @@ int main(void){
 			directories.push_back(line);
 		}
 	}
-	std::cout << "Under 100k:\n";
+	std::cout << "over 30m:\n";
 	int totalSub100k = 0;
-	for(int i = 0; i < directories.size(); i++){
+//	for(int i = 0; i < directories.size(); i++){
+	for(int i = 0; i < 1; i++){
 		infile.clear();
 		infile.seekg(0);
 		unsigned long int dirTotal = 0;
@@ -110,9 +111,9 @@ int main(void){
 				dirTotal += stoul(line);
 			}
 		}
-		if(dirTotal <= 100000){
+		if(dirTotal > 0){
 			totalSub100k += dirTotal;
-			std::cout << directories[i] << std::endl;
+			std::cout << directories[i] << " | " << dirTotal << std::endl;
 		}
 		
 
