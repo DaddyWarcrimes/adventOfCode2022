@@ -2,7 +2,11 @@
 #include <fstream>
 #include <string>
 #define MAXH 364
-#define MAXV 322
+#define MAXV 364
+
+#define HBUFFER 25
+#define VBUFFER 18
+#define DELAY "sleep .1"
 
 void follow(int hY, int hX, int* tY, int* tX ){
 	if(hY - *tY >= 2){
@@ -148,31 +152,55 @@ int main(void){
 				break;
 		}
 
-/*		char display[MAXV][MAXH];
+		char display[MAXV][MAXH];
 		for(int i = 0; i < MAXV; i++){
 			for(int j = 0; j < MAXH; j++){
 				display[i][j] = '.';
 			}
 		}
-		display[hY][hX] = 'H';
-		display[tY1][tX1] = '1';
-		display[tY2][tX2] = '2';
-		display[tY3][tX3] = '3';
-		display[tY4][tX4] = '4';
-		display[tY5][tX5] = '5';
-		display[tY6][tX6] = '6';
-		display[tY7][tX7] = '7';
-		display[tY8][tX8] = '8';
 		display[tY9][tX9] = '9';
-		for(int i = hY - 10; i < hY + 10; i++){
-			for(int j = hX - 10; j < hX + 10; j++){
+		display[tY8][tX8] = '8';
+		display[tY7][tX7] = '7';
+		display[tY6][tX6] = '6';
+		display[tY5][tX5] = '5';
+		display[tY4][tX4] = '4';
+		display[tY3][tX3] = '3';
+		display[tY2][tX2] = '2';
+		display[tY1][tX1] = '1';
+		display[hY][hX] = 'H';
+
+		int starty = 0;
+		if (hY > VBUFFER - 1){
+			starty = hY - VBUFFER;
+		}
+		int endy = MAXV;
+		if(hY + VBUFFER - 1 < MAXV){
+			endy = hY + VBUFFER;
+		}
+		int startx = 0;
+		if(hX > HBUFFER - 1){
+			startx = hX - HBUFFER;
+		}
+		int endx = MAXH;
+		if(hX + HBUFFER - 1 < MAXH){
+			endx = hX + HBUFFER;
+		}
+
+		system("clear");
+		for(int i = startx; i < endx; i++){
+			printf("%d", i % 10);
+			}
+		printf("\n");
+
+		for(int i = starty; i < endy; i++){
+			for(int j = startx; j < endx; j++){
 				printf("%c",display[i][j]);
 			}
-			printf("\n");
+			printf(" %d\n",i);
 		}
-*/
  
-	//	std::cout << line << std::endl << " | " << hY << "," << hX << std::endl << " | " << tY9 << "," << tX9 << std::endl;
+		std::cout << line << std::endl << " | " << hY << "," << hX << std::endl << " | " << tY9 << "," << tX9 << std::endl;
+		system(DELAY);
 	}
 	int visited = 0;
 	for(int i = 0; i < MAXH; i++){
@@ -182,7 +210,7 @@ int main(void){
 			}
 		}
 	}
-	for(int i = 0; i < MAXH; i++){
+/*	for(int i = 0; i < MAXH; i++){
 		printf("%d",i % 10);
 	}
 	printf("\n\n");
@@ -192,7 +220,7 @@ int main(void){
 			printf("%c",(int)map[i][j] + 32);
 		}
 		printf("\n");
-	}
+	}*/
 	printf("\n..........\n%d\n",visited);
 }
 
