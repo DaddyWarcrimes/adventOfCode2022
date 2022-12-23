@@ -172,7 +172,12 @@ int main(void){
 		char display[MAXV][MAXH];
 		for(int i = starty; i < endy; i++){
 			for(int j = startx; j < endx; j++){
-				display[i][j] = '.';
+				if (map[i][j]){
+					display[i][j] = '#';
+				}
+				else{
+					display[i][j] = '.';
+				}
 			}
 		}
 		display[tY9][tX9] = '9';
@@ -200,7 +205,7 @@ int main(void){
 			printf(" %d\n",i);
 		}
  
-		std::cout << line << std::endl << " | " << hY << "," << hX << std::endl << " | " << tY9 << "," << tX9 << std::endl;
+		std::cout << line << std::endl << " | head: " << hY << "," << hX << std::endl << " | tail: " << tY9 << "," << tX9 << std::endl;
 		system(DELAY);
 	}
 	int visited = 0;
