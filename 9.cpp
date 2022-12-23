@@ -5,19 +5,19 @@
 #define MAXV 322
 
 void follow(int hY, int hX, int* tY, int* tX ){
-	if(hY - *tY == 2){
+	if(hY - *tY >= 2){
 		*tY = hY -1;
 		*tX = hX;
 	}
-	if(hY - *tY == -2){
+	if(hY - *tY <= -2){
 		*tY = hY + 1;
 		*tX = hX;
 	}
-	if(hX - *tX == 2){
+	if(hX - *tX >= 2){
 		*tX = hX -1;
 		*tY = hY;
 	}
-	if(hX - *tX == -2){
+	if(hX - *tX <= -2){
 		*tX = hX + 1;
 		*tY = hY;
 	}
@@ -147,6 +147,31 @@ int main(void){
 			default:
 				break;
 		}
+
+/*		char display[MAXV][MAXH];
+		for(int i = 0; i < MAXV; i++){
+			for(int j = 0; j < MAXH; j++){
+				display[i][j] = '.';
+			}
+		}
+		display[hY][hX] = 'H';
+		display[tY1][tX1] = '1';
+		display[tY2][tX2] = '2';
+		display[tY3][tX3] = '3';
+		display[tY4][tX4] = '4';
+		display[tY5][tX5] = '5';
+		display[tY6][tX6] = '6';
+		display[tY7][tX7] = '7';
+		display[tY8][tX8] = '8';
+		display[tY9][tX9] = '9';
+		for(int i = hY - 10; i < hY + 10; i++){
+			for(int j = hX - 10; j < hX + 10; j++){
+				printf("%c",display[i][j]);
+			}
+			printf("\n");
+		}
+*/
+ 
 	//	std::cout << line << std::endl << " | " << hY << "," << hX << std::endl << " | " << tY9 << "," << tX9 << std::endl;
 	}
 	int visited = 0;
@@ -157,9 +182,13 @@ int main(void){
 			}
 		}
 	}
-	printf("\n..........\n%d\n",visited);
 	for(int i = 0; i < MAXH; i++){
-		for(int j = 0; j < MAXV; j++){
+		printf("%d",i % 10);
+	}
+	printf("\n\n");
+
+	for(int i = 0; i < MAXV; i++){
+		for(int j = 0; j < 226; j++){
 			printf("%c",(int)map[i][j] + 32);
 		}
 		printf("\n");
