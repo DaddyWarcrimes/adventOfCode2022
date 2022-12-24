@@ -6,7 +6,7 @@
 
 #define HBUFFER 25
 #define VBUFFER 18
-#define DELAY "sleep .05"
+#define DELAY "sleep .0"
 
 void follow(int hY, int hX, int* tY, int* tX ){
 	if(hY - *tY >= 2){
@@ -191,6 +191,8 @@ int main(void){
 		display[tY1][tX1] = '1';
 		display[hY][hX] = 'H';
 
+		// Skip the display
+//		continue;
 
 		system("clear");
 		for(int i = startx; i < endx; i++){
@@ -208,14 +210,21 @@ int main(void){
 		std::cout << line << std::endl << " | head: " << hY << "," << hX << std::endl << " | tail: " << tY9 << "," << tX9 << std::endl;
 		system(DELAY);
 	}
+	infile.close();
+	std::ofstream outfile;
+	outfile.open("9out.txt");
 	int visited = 0;
 	for(int i = 0; i < MAXH; i++){
 		for(int j = 0; j < MAXV; j++){
-			if(map[i][j]){
+			visited += (int)map[i][j];
+			/*if(map[i][j]){
 				visited++;
-			}
+			}*/
+			outfile << (char)((int)map[i][j] * 3 + 32);
 		}
+		outfile << std::endl;
 	}
+	outfile.close();
 /*	for(int i = 0; i < MAXH; i++){
 		printf("%d",i % 10);
 	}
